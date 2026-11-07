@@ -156,6 +156,39 @@ section{padding:clamp(72px,9vw,124px) 0;scroll-margin-top:40px}
 .cities li span{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);align-self:center;text-align:right}
 .cities li.home{color:var(--gold)}
 
+/* photos */
+.photos{background:var(--bg-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.tabs{display:flex;gap:4px;margin-bottom:28px;border-bottom:1px solid var(--rule);overflow-x:auto;scrollbar-width:none}
+.tab{background:none;border:0;border-bottom:1px solid transparent;margin-bottom:-1px;color:var(--ink-3);font:500 .74rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;padding:16px 18px 18px 0;margin-right:22px;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--gold);border-bottom-color:var(--gold)}
+.tab b{font-family:var(--serif);font-weight:400;font-size:1.05rem;letter-spacing:0;margin-left:8px;color:var(--ink-2)}
+.album-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.album-head h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.1}
+.album-head p{color:var(--ink-3);font-size:.86rem}
+.gallery{display:flex;flex-wrap:wrap;gap:6px}
+.gallery::after{content:"";flex-grow:9999}
+.gallery a{--r:1.5;flex:var(--r) 1 calc(var(--r) * 190px);position:relative;display:block;background:var(--panel);overflow:hidden;cursor:zoom-in}
+.gallery img{display:block;width:100%;height:auto;aspect-ratio:var(--r);object-fit:cover;transition:transform .6s ease,opacity .4s;opacity:0}
+.gallery img.ok{opacity:1}
+.gallery a:hover img{transform:scale(1.035)}
+.gallery a:focus-visible{outline:1px solid var(--gold);outline-offset:2px}
+.more{display:block;margin:30px auto 0;background:none;border:1px solid var(--gold-2);color:var(--gold);font:500 .7rem/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;padding:15px 26px;cursor:pointer;transition:background .2s,color .2s}
+.more:hover{background:var(--gold);color:var(--bg)}
+.empty{border:1px dashed var(--rule);padding:clamp(36px,6vw,72px);text-align:center}
+.empty h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.1}
+.empty p{color:var(--ink-2);max-width:48ch;margin:14px auto 0}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(8,7,6,.97);display:none;flex-direction:column;align-items:center;justify-content:center;padding:56px 16px 64px;touch-action:pan-y}
+.lb.open{display:flex}
+.lb figure{max-width:100%;max-height:100%;display:flex;align-items:center;justify-content:center;flex:1;min-height:0}
+.lb img{max-width:min(100%,1600px);max-height:calc(100vh - 140px);max-height:calc(100svh - 140px);object-fit:contain;box-shadow:0 20px 80px rgba(0,0,0,.6)}
+.lb .bar{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px max(var(--gutter),env(safe-area-inset-left,0px));padding-top:max(14px,env(safe-area-inset-top,0px));font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3)}
+.lb button{background:none;border:0;color:var(--ink);cursor:pointer;font:300 1.6rem/1 var(--sans);width:48px;height:48px;display:grid;place-items:center;transition:color .2s}
+.lb button:hover{color:var(--gold)}
+.lb .prev,.lb .next{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:3rem}
+.lb .prev{left:max(8px,env(safe-area-inset-left,0px))}.lb .next{right:max(8px,env(safe-area-inset-right,0px))}
+.lb-open body{overflow:hidden}
+
 /* next */
 .next .tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
 .tile{background:var(--bg);padding:clamp(30px,5vw,56px);display:flex;flex-direction:column;align-items:flex-start}
@@ -190,7 +223,7 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 }
 @media (max-width:760px){
   .nav ul{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));left:0;right:0;flex-direction:column;gap:0;background:rgba(14,13,11,.98);border-bottom:1px solid var(--rule);max-height:0;overflow:hidden;transition:max-height .35s ease}
-  .nav.open ul{max-height:340px}
+  .nav.open ul{max-height:400px}
   .nav ul li a{display:block;padding:16px var(--gutter);border-top:1px solid var(--rule)}
   .nav.open{background:rgba(14,13,11,.98)}
   .menu-btn{display:block}
@@ -236,6 +269,7 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
       <li><a href="#eight">The Eight</a></li>
       <li><a href="#timeline">Timeline</a></li>
       <li><a href="#places">Places</a></li>
+      <li><a href="#photos">Photos</a></li>
       <li><a href="#next">Family</a></li>
     </ul>
   </div>
@@ -402,6 +436,27 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
   </div>
 </section>
 
+<section class="photos" id="photos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Gathered</div><h2>Family <em>photos</em></h2></div>
+      <p>Pictures from the reunions, and the ones families have sent in from their own albums.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Photo albums">
+      <button class="tab" role="tab" id="tab-reunion-2022" aria-controls="album" aria-selected="true" data-album="reunion-2022">Reunion 2022<b></b></button>
+      <button class="tab" role="tab" id="tab-family" aria-controls="album" aria-selected="false" data-album="family">Family submitted<b></b></button>
+    </div>
+    <div id="album" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="bar"><span id="lbCount"></span><button type="button" id="lbClose" aria-label="Close">&times;</button></div>
+  <button type="button" class="prev" id="lbPrev" aria-label="Previous photo">&lsaquo;</button>
+  <figure><img id="lbImg" alt=""></figure>
+  <button type="button" class="next" id="lbNext" aria-label="Next photo">&rsaquo;</button>
+</div>
+
 <section class="next" id="next">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -433,7 +488,52 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
   </div>
 </footer>
 
+<script src="photos/photos.js"></script>
 <script>
+(function(){
+  var P=window.PHOTOS||{},album=document.getElementById('album'),tabs=document.querySelectorAll('.tab'),PAGE=30;
+  var lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCount=document.getElementById('lbCount'),cur=null,idx=0,lastFocus=null;
+  tabs.forEach(function(t){var a=P[t.dataset.album];t.querySelector('b').textContent=a?a.items.length:0;t.addEventListener('click',function(){show(t.dataset.album)})});
+  function show(key){
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.album===key)});
+    var a=P[key];album.setAttribute('aria-labelledby','tab-'+key);album.innerHTML='';
+    if(!a||!a.items.length){
+      album.innerHTML='<div class="empty"><div class="eyebrow">Coming together</div><h3>Share your photos</h3><p>Old portraits, reunion snapshots, pictures of Collins. Send them in and they will be added to this album, credited to your branch of the family.</p></div>';
+      return;
+    }
+    var head=document.createElement('div');head.className='album-head';
+    head.innerHTML='<h3>'+a.title+'</h3><p>'+a.items.length+' photos</p>';album.appendChild(head);
+    var g=document.createElement('div');g.className='gallery';album.appendChild(g);
+    var shown=0,btn=document.createElement('button');btn.type='button';btn.className='more';
+    function add(){
+      var end=Math.min(shown+PAGE,a.items.length);
+      for(var i=shown;i<end;i++){(function(i){
+        var it=a.items[i],ln=document.createElement('a');
+        ln.href=a.base+'full/'+it[0];ln.style.setProperty('--r',(it[1]/it[2]).toFixed(3));
+        ln.setAttribute('aria-label','Open photo '+(i+1)+' of '+a.items.length);
+        var im=new Image();im.loading='lazy';im.decoding='async';im.alt='';im.width=it[1];im.height=it[2];
+        im.onload=function(){im.classList.add('ok')};im.src=a.base+'thumb/'+it[0];if(im.complete)im.classList.add('ok');
+        ln.appendChild(im);ln.addEventListener('click',function(e){e.preventDefault();open(key,i)});g.appendChild(ln);
+      })(i)}
+      shown=end;
+      if(shown<a.items.length){btn.textContent='Show more · '+(a.items.length-shown)+' left';if(!btn.parentNode)album.appendChild(btn)}else if(btn.parentNode)btn.remove();
+    }
+    btn.addEventListener('click',add);add();
+  }
+  function render(){var a=P[cur],it=a.items[idx];lbImg.src=a.base+'full/'+it[0];lbImg.alt=a.title+', photo '+(idx+1);lbCount.textContent=a.title+'  ·  '+(idx+1)+' / '+a.items.length;
+    [idx-1,idx+1].forEach(function(j){if(j>=0&&j<a.items.length){var pre=new Image();pre.src=a.base+'full/'+a.items[j][0]}})}
+  function open(key,i){cur=key;idx=i;lastFocus=document.activeElement;render();lb.classList.add('open');document.documentElement.classList.add('lb-open');document.getElementById('lbClose').focus()}
+  function close(){lb.classList.remove('open');document.documentElement.classList.remove('lb-open');lbImg.removeAttribute('src');if(lastFocus)lastFocus.focus()}
+  function step(d){var n=P[cur].items.length;idx=(idx+d+n)%n;render()}
+  document.getElementById('lbClose').addEventListener('click',close);
+  document.getElementById('lbPrev').addEventListener('click',function(){step(-1)});
+  document.getElementById('lbNext').addEventListener('click',function(){step(1)});
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')close()});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();else if(e.key==='ArrowLeft')step(-1);else if(e.key==='ArrowRight')step(1)});
+  var x0=null;lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)step(dx<0?1:-1);x0=null},{passive:true});
+  show('reunion-2022');
+})();
 (function(){
   var root=document.documentElement,sp=document.getElementById('splash'),enter=document.getElementById('enter'),done=false;
   if(root.classList.contains('splash-on')){
