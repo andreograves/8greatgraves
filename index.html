@@ -14,6 +14,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+(function(r){r.classList.add('js');var show=!location.hash;try{if(sessionStorage.getItem('8gg-splash'))show=false}catch(e){}if(/[?&]splash/.test(location.search))show=true;if(show)r.classList.add('splash-on')})(document.documentElement);
+</script>
 <style>
 :root{
   --bg:#0e0d0b;
@@ -41,6 +44,28 @@ a{color:inherit}
 .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500}
 .rule{height:1px;background:var(--rule);border:0}
 
+/* splash */
+.splash{position:fixed;inset:0;z-index:45;background:var(--bg);display:none;place-items:center;text-align:center;overflow:hidden;padding:24px max(var(--gutter),env(safe-area-inset-left,0px))}
+.splash-on .splash{display:grid}
+.splash-on body{overflow:hidden}
+.splash::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 100%,rgba(201,169,106,.16),transparent 70%);pointer-events:none}
+.splash.leaving{transform:translateY(-100%);transition:transform 1s cubic-bezier(.7,0,.2,1)}
+.branches{position:absolute;inset:0;width:100%;height:100%}
+.branches path{fill:none;stroke:var(--gold-2);stroke-width:1.2;opacity:.55;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.8s cubic-bezier(.4,0,.2,1) forwards}
+.branches circle{fill:var(--gold);opacity:0;animation:fade .6s ease forwards}
+.branches text{fill:var(--ink-3);font-family:var(--serif);font-size:22px;text-anchor:middle;opacity:0;animation:fade .8s ease forwards}
+.branches .root{fill:var(--gold);opacity:1;animation:none}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fade{to{opacity:1}}
+.splash-inner{position:relative;z-index:1;padding:clamp(28px,6vw,64px);background:radial-gradient(closest-side,rgba(14,13,11,.92),rgba(14,13,11,.6) 70%,transparent);opacity:0;animation:fade 1.2s ease .5s forwards}
+.splash .num8{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(7rem,22vw,13rem);line-height:.85;color:var(--gold)}
+.splash h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1;letter-spacing:.01em;margin:6px 0 18px}
+.splash .sub{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.4vw,1.45rem);color:var(--ink-2)}
+.enter{margin-top:36px;background:none;border:1px solid var(--gold-2);color:var(--gold);font:500 .72rem/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;padding:16px 30px 16px 34px;cursor:pointer;transition:background .25s,color .25s}
+.enter:hover,.enter:focus-visible{background:var(--gold);color:var(--bg);outline:none}
+@media (max-aspect-ratio:4/5){.splash-inner{align-self:start;margin-top:clamp(40px,11vh,120px)}}
+.splash .hint{position:absolute;left:0;right:0;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:1;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);opacity:0;animation:fade 1s ease 2.2s forwards}
+
 /* nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:40;padding-top:env(safe-area-inset-top,0px);transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
 .nav.scrolled{background:rgba(14,13,11,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom-color:var(--rule)}
@@ -57,23 +82,33 @@ a{color:inherit}
 .nav.open .menu-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* hero */
-.hero{min-height:clamp(560px,86vh,860px);min-height:clamp(560px,86svh,860px);display:flex;align-items:center;position:relative;overflow:hidden;padding:110px 0 80px}
-.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 70% 45%,rgba(201,169,106,.10),transparent 70%);pointer-events:none}
-.hero .eight{position:absolute;right:-2vw;top:50%;transform:translateY(-52%);font-family:var(--serif);font-weight:300;font-size:min(88vh,72vw);line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(201,169,106,.22);user-select:none;pointer-events:none}
-.hero .wrap{position:relative;z-index:1;width:100%}
-.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(3.2rem,10vw,8.4rem);line-height:.95;letter-spacing:-.01em;margin:22px 0 28px;max-width:11ch}
+.hero{min-height:clamp(600px,92vh,920px);min-height:clamp(600px,92svh,920px);display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 90px}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 78% 50%,rgba(201,169,106,.09),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(40px,7vw,110px);align-items:center}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(3.2rem,8.6vw,7.6rem);line-height:.95;letter-spacing:-.01em;margin:22px 0 28px;max-width:11ch}
 .hero h1 em{font-style:italic;color:var(--gold)}
-.hero p.lede{font-family:var(--serif);font-size:clamp(1.25rem,2.6vw,1.75rem);font-weight:300;color:var(--ink-2);max-width:34ch;line-height:1.35}
-.hero .meta{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:44px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.hero p.lede{font-family:var(--serif);font-size:clamp(1.25rem,2.4vw,1.7rem);font-weight:300;color:var(--ink-2);max-width:32ch;line-height:1.35}
+.hero:focus{outline:none}
+.hero .meta{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:44px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .hero .meta span b{color:var(--ink);font-weight:500}
-.scroll-cue{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:1;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:10px}
-.scroll-cue::after{content:"";width:1px;height:36px;background:linear-gradient(var(--gold),transparent)}
+.roll{border-left:1px solid var(--rule);padding-left:clamp(24px,3vw,40px)}
+.roll .eyebrow{color:var(--ink-3);margin-bottom:14px}
+.roll ol{list-style:none}
+.roll a{display:grid;grid-template-columns:3.2em 1fr auto;align-items:baseline;gap:8px;padding:11px 0;border-bottom:1px solid var(--rule);text-decoration:none;transition:color .2s,padding .25s}
+.roll li:last-child a{border-bottom:0}
+.roll a:hover{color:var(--gold);padding-left:6px}
+.roll i{font-family:var(--serif);font-style:normal;color:var(--gold);font-size:1.15rem}
+.roll strong{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.2}
+.roll small{font-size:.74rem;letter-spacing:.12em;color:var(--ink-3)}
+.scroll-cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:1;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-cue::after{content:"";width:1px;height:32px;background:linear-gradient(var(--gold),transparent)}
 
-section{padding:clamp(80px,12vw,150px) 0}
-.sec-head{display:grid;grid-template-columns:1fr 2fr;gap:40px;margin-bottom:clamp(44px,6vw,72px);align-items:end}
+section{padding:clamp(72px,9vw,124px) 0;scroll-margin-top:40px}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:20px clamp(32px,6vw,90px);margin-bottom:clamp(40px,5vw,64px);align-items:end;padding-bottom:clamp(24px,3vw,36px);border-bottom:1px solid var(--rule)}
+.sec-head .eyebrow{margin-bottom:16px}
 .sec-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,5.4vw,4.2rem);line-height:1}
 .sec-head h2 em{color:var(--gold)}
-.sec-head p{color:var(--ink-2);max-width:56ch;font-size:1.02rem}
+.sec-head p{color:var(--ink-2);max-width:46ch;font-family:var(--serif);font-size:1.3rem;line-height:1.45}
 
 /* founders */
 .founders{background:var(--bg-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -84,12 +119,11 @@ section{padding:clamp(80px,12vw,150px) 0}
 .person .dates{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--gold)}
 .person .place{font-size:.88rem;color:var(--ink-2);margin-top:6px}
 .amp{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(3rem,7vw,6rem);color:var(--gold-2);line-height:1}
-.founders .note{text-align:center;max-width:60ch;margin:clamp(28px,4vw,48px) auto 0;color:var(--ink-2);font-family:var(--serif);font-size:1.3rem;line-height:1.5}
 
 /* the eight */
 .grid8{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
-.card{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:30px 26px 32px;position:relative;min-height:300px;display:flex;flex-direction:column;transition:background .3s}
-.card:hover{background:var(--panel)}
+.card{scroll-margin-top:90px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:30px 26px 32px;position:relative;min-height:300px;display:flex;flex-direction:column;transition:background .3s}
+.card:hover,.card:target{background:var(--panel)}
 .card .num{font-family:var(--serif);font-weight:300;font-size:3.6rem;line-height:1;color:var(--gold);opacity:.85}
 .card .numname{font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
 .card h3{font-family:var(--serif);font-weight:500;font-size:1.9rem;line-height:1.1;margin:22px 0 4px}
@@ -113,6 +147,8 @@ section{padding:clamp(80px,12vw,150px) 0}
 
 /* places */
 .places .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(36px,6vw,90px);align-items:start}
+.places .lead{position:sticky;top:110px}
+.places .lead p{color:var(--ink-2);margin-top:22px;max-width:40ch}
 .places blockquote{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,3.6vw,2.8rem);line-height:1.2}
 .places blockquote em{color:var(--gold)}
 .cities{list-style:none;border-top:1px solid var(--rule)}
@@ -122,14 +158,15 @@ section{padding:clamp(80px,12vw,150px) 0}
 
 /* next */
 .next .tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.tile{background:var(--bg);padding:clamp(30px,5vw,56px)}
+.tile{background:var(--bg);padding:clamp(30px,5vw,56px);display:flex;flex-direction:column;align-items:flex-start}
 .tile .eyebrow{color:var(--ink-3)}
 .tile h3{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem);margin:14px 0 12px;line-height:1.05}
-.tile p{color:var(--ink-2);max-width:42ch}
-.tile .stat{display:flex;gap:36px;margin-top:28px}
+.tile p{color:var(--ink-2);max-width:42ch;margin-bottom:28px}
+.tile .stat{margin-bottom:32px}
+.tile .stat{display:flex;gap:36px;margin-top:0}
 .tile .stat b{display:block;font-family:var(--serif);font-weight:300;font-size:2.8rem;line-height:1;color:var(--gold)}
 .tile .stat span{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
-.pill{display:inline-block;margin-top:28px;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;border:1px solid var(--gold-2);color:var(--gold);padding:9px 16px}
+.pill{display:inline-block;margin-top:auto;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;border:1px solid var(--gold-2);color:var(--gold);padding:9px 16px}
 
 footer{border-top:1px solid var(--rule);padding:44px 0 56px}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
@@ -138,9 +175,15 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 
 .js .reveal{transform:translateY(16px);transition:transform .9s ease}
 .js .reveal.in{transform:none}
-@media (prefers-reduced-motion:reduce){.js .reveal{transform:none;transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.js .reveal{transform:none;transition:none}html{scroll-behavior:auto}.branches *,.splash-inner,@media (max-aspect-ratio:4/5){.splash-inner{align-self:start;margin-top:clamp(40px,11vh,120px)}}
+.splash .hint{animation:none!important;opacity:1!important;stroke-dashoffset:0!important}.branches path{opacity:.55!important}.splash.leaving{transition:none}}
 
 @media (max-width:1000px){
+  .hero .wrap{grid-template-columns:1fr}
+  .roll{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:22px}
+  .roll ol{display:grid;grid-template-columns:1fr 1fr;column-gap:32px}
+  .roll li:nth-last-child(2) a{border-bottom:0}
+  .scroll-cue{display:none}
   .grid8{grid-template-columns:repeat(2,1fr)}
   .tl{grid-template-columns:repeat(3,1fr);row-gap:30px}
   .tl::before{display:none}
@@ -155,18 +198,34 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
   .pair{grid-template-columns:1fr;gap:0}
   .amp{text-align:center;margin:-8px 0}
   .places .cols{grid-template-columns:1fr}
+  .places .lead{position:static}
   .next .tiles{grid-template-columns:1fr}
-  .hero .eight{right:-12vw;top:58%;font-size:118vw;opacity:.8}
 }
 @media (max-width:520px){
   .grid8{grid-template-columns:1fr}
   .card{min-height:0}
   .tl{grid-template-columns:repeat(2,1fr)}
   .hero .meta{gap:10px 24px}
+  .roll ol{grid-template-columns:1fr}
+  .roll li:nth-last-child(2) a{border-bottom:1px solid var(--rule)}
 }
 </style>
 </head>
 <body>
+
+<div class="splash" id="splash" aria-label="Welcome">
+  <svg class="branches" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <path pathLength="1" style="animation-delay:0.15s" d="M500 1000C500 720 80 600 80 300"/><circle cx="80" cy="300" r="4" style="animation-delay:1.65s"/><text x="80" y="278" style="animation-delay:1.75s">I</text><path pathLength="1" style="animation-delay:0.24s" d="M500 1000C500 720 200 600 200 210"/><circle cx="200" cy="210" r="4" style="animation-delay:1.74s"/><text x="200" y="188" style="animation-delay:1.84s">II</text><path pathLength="1" style="animation-delay:0.33s" d="M500 1000C500 720 320 600 320 150"/><circle cx="320" cy="150" r="4" style="animation-delay:1.83s"/><text x="320" y="128" style="animation-delay:1.93s">III</text><path pathLength="1" style="animation-delay:0.42s" d="M500 1000C500 720 440 600 440 115"/><circle cx="440" cy="115" r="4" style="animation-delay:1.92s"/><text x="440" y="93" style="animation-delay:2.02s">IV</text><path pathLength="1" style="animation-delay:0.51s" d="M500 1000C500 720 560 600 560 115"/><circle cx="560" cy="115" r="4" style="animation-delay:2.01s"/><text x="560" y="93" style="animation-delay:2.11s">V</text><path pathLength="1" style="animation-delay:0.60s" d="M500 1000C500 720 680 600 680 150"/><circle cx="680" cy="150" r="4" style="animation-delay:2.10s"/><text x="680" y="128" style="animation-delay:2.20s">VI</text><path pathLength="1" style="animation-delay:0.69s" d="M500 1000C500 720 800 600 800 210"/><circle cx="800" cy="210" r="4" style="animation-delay:2.19s"/><text x="800" y="188" style="animation-delay:2.29s">VII</text><path pathLength="1" style="animation-delay:0.78s" d="M500 1000C500 720 920 600 920 300"/><circle cx="920" cy="300" r="4" style="animation-delay:2.28s"/><text x="920" y="278" style="animation-delay:2.38s">VIII</text>
+    <circle class="root" cx="500" cy="996" r="6"/>
+  </svg>
+  <div class="splash-inner">
+    <span class="num8" aria-hidden="true">8</span>
+    <h1>Great Graves</h1>
+    <p class="sub">Freeman &amp; Eliza · Collins, Mississippi · 1849</p>
+    <button class="enter" id="enter" type="button">Enter</button>
+  </div>
+  <div class="hint" aria-hidden="true">Eight children · one family</div>
+</div>
 
 <nav class="nav" id="nav">
   <div class="wrap">
@@ -182,17 +241,31 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
   </div>
 </nav>
 
-<header class="hero" id="top">
-  <div class="eight" aria-hidden="true">8</div>
+<header class="hero" id="top" tabindex="-1">
   <div class="wrap">
-    <div class="eyebrow">Collins, Mississippi · Since 1849</div>
-    <h1>The <em>8</em> Great Graves</h1>
-    <p class="lede">One family, eight children, and every generation that followed from Freeman Graves and Eliza Price.</p>
-    <div class="meta">
-      <span><b>8</b> children</span>
-      <span><b>58</b> grandchildren on record</span>
-      <span><b>9</b> generations</span>
+    <div class="reveal">
+      <div class="eyebrow">Collins, Mississippi · Since 1849</div>
+      <h1>The <em>8</em> Great Graves</h1>
+      <p class="lede">One family, eight children, and every generation that followed from Freeman Graves and Eliza Price.</p>
+      <div class="meta">
+        <span><b>8</b> children</span>
+        <span><b>58</b> grandchildren on record</span>
+        <span><b>9</b> generations</span>
+      </div>
     </div>
+    <nav class="roll reveal" aria-label="The eight children">
+      <div class="eyebrow">The eight, in birth order</div>
+      <ol>
+        <li><a href="#c1"><i>I</i><strong>Laura</strong><small>1870</small></a></li>
+        <li><a href="#c2"><i>II</i><strong>John Freeman</strong><small>1875</small></a></li>
+        <li><a href="#c3"><i>III</i><strong>Polly</strong><small>1877</small></a></li>
+        <li><a href="#c4"><i>IV</i><strong>Shedrick</strong><small>1879</small></a></li>
+        <li><a href="#c5"><i>V</i><strong>William</strong><small>1883</small></a></li>
+        <li><a href="#c6"><i>VI</i><strong>Moses</strong><small>1888</small></a></li>
+        <li><a href="#c7"><i>VII</i><strong>Jasper</strong><small>1891</small></a></li>
+        <li><a href="#c8"><i>VIII</i><strong>Daniel</strong><small>1897</small></a></li>
+      </ol>
+    </nav>
   </div>
   <a href="#founders" class="scroll-cue">Begin</a>
 </header>
@@ -200,8 +273,8 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 <section class="founders" id="founders">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Generation one</div>
-      <h2>Where it <em>begins</em></h2>
+      <div><div class="eyebrow">Generation one</div><h2>Where it <em>begins</em></h2></div>
+      <p>Freeman and Eliza married in Mississippi and raised eight children in Collins between 1870 and 1897. Every Graves descendant traces back to them.</p>
     </div>
     <div class="pair reveal">
       <div class="person">
@@ -218,72 +291,67 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
         <div class="place">Mississippi</div>
       </div>
     </div>
-    <p class="note reveal">Freeman and Eliza married in Mississippi and raised eight children in Collins between 1870 and 1897. Those eight are the branches every Graves descendant traces back to.</p>
   </div>
 </section>
 
 <section id="eight">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div>
-        <div class="eyebrow">Generation two</div>
-      </div>
-      <div>
-        <h2>The <em>Eight</em></h2>
-      </div>
+      <div><div class="eyebrow">Generation two</div><h2>The <em>Eight</em></h2></div>
+      <p>Each child started a branch of the family. The number in the corner is how many children they had on record.</p>
     </div>
     <div class="grid8">
 
-      <article class="card reveal">
+      <article class="card reveal" id="c1">
         <div class="num">I</div><div class="numname">First born</div>
         <div class="kids"><b>4</b><span>Children</span></div>
         <h3>Laura Graves</h3><div class="aka">&nbsp;</div>
         <dl><dt>Born</dt><dd>Oct 1870, Collins</dd><dt>Died</dt><dd>Collins</dd></dl>
       </article>
 
-      <article class="card reveal">
+      <article class="card reveal" id="c2">
         <div class="num">II</div><div class="numname">Second</div>
         <div class="kids"><b>9</b><span>Children</span></div>
         <h3>John Freeman Graves</h3><div class="aka">&nbsp;</div>
         <dl><dt>Born</dt><dd>Apr 1875, Collins</dd><dt>Died</dt><dd>May 30, 1967, Collins</dd><dt>Wed</dt><dd>Ina Gibbs, 1898</dd></dl>
       </article>
 
-      <article class="card reveal">
+      <article class="card reveal" id="c3">
         <div class="num">III</div><div class="numname">Third</div>
         <div class="kids"><b>1</b><span>Child</span></div>
         <h3>Polly Graves</h3><div class="aka">&nbsp;</div>
         <dl><dt>Born</dt><dd>Jan 1877, Collins</dd><dt>Died</dt><dd>Collins</dd><dt>Wed</dt><dd>Vandus McGee</dd></dl>
       </article>
 
-      <article class="card reveal">
+      <article class="card reveal" id="c4">
         <div class="num">IV</div><div class="numname">Fourth</div>
         <div class="kids"><b>14</b><span>Children</span></div>
         <h3>Shedrick Graves</h3><div class="aka">“Shed”</div>
         <dl><dt>Born</dt><dd>Dec 1879, Collins</dd><dt>Died</dt><dd>Mississippi</dd><dt>Wed</dt><dd>Robbie McLaurin, 1916</dd></dl>
       </article>
 
-      <article class="card reveal">
+      <article class="card reveal" id="c5">
         <div class="num">V</div><div class="numname">Fifth</div>
         <div class="kids"><b>2</b><span>Children</span></div>
         <h3>William Graves</h3><div class="aka">&nbsp;</div>
         <dl><dt>Born</dt><dd>Nov 1883, Collins</dd><dt>Wed</dt><dd>Genella Slader; Clara McLaurin, 1914</dd></dl>
       </article>
 
-      <article class="card reveal">
+      <article class="card reveal" id="c6">
         <div class="num">VI</div><div class="numname">Sixth</div>
         <div class="kids"><b>4</b><span>Children</span></div>
         <h3>Moses Graves</h3><div class="aka">&nbsp;</div>
         <dl><dt>Born</dt><dd>Apr 5, 1888, Collins</dd><dt>Wed</dt><dd>Carrie</dd></dl>
       </article>
 
-      <article class="card reveal">
+      <article class="card reveal" id="c7">
         <div class="num">VII</div><div class="numname">Seventh</div>
         <div class="kids"><b>14</b><span>Children</span></div>
         <h3>Jasper Graves, Sr.</h3><div class="aka">“Jap”</div>
         <dl><dt>Born</dt><dd>Mar 15, 1891, Collins</dd><dt>Died</dt><dd>Dec 15, 1967, Collins</dd><dt>Wed</dt><dd>Girtie McLaurin, 1914</dd></dl>
       </article>
 
-      <article class="card reveal">
+      <article class="card reveal" id="c8">
         <div class="num">VIII</div><div class="numname">Youngest</div>
         <div class="kids"><b>10</b><span>Children</span></div>
         <h3>Daniel Graves</h3><div class="aka">“Dan”</div>
@@ -298,8 +366,8 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 <section class="timeline" id="timeline">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">A century in Collins</div>
-      <h2>The first <em>hundred</em> years</h2>
+      <div><div class="eyebrow">A century in Collins</div><h2>The first <em>hundred</em> years</h2></div>
+      <p>From Freeman's birth to the passing of Daniel, the last of the eight.</p>
     </div>
     <ol class="tl reveal">
       <li><div class="yr">1849</div><div class="ev">Freeman Graves is born in Mississippi.</div></li>
@@ -315,9 +383,10 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 <section class="places" id="places">
   <div class="wrap">
     <div class="cols">
-      <div class="reveal">
+      <div class="lead reveal">
         <div class="eyebrow">Generation three</div>
         <blockquote style="margin-top:22px">From Collins, the grandchildren carried the name <em>north and outward</em>.</blockquote>
+        <p>Where the grandchildren settled, with the branch of the eight each family came from.</p>
       </div>
       <ul class="cities reveal">
         <li class="home">Collins, Mississippi <span>Home</span></li>
@@ -336,8 +405,8 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 <section class="next" id="next">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">For the family</div>
-      <h2>Still <em>growing</em></h2>
+      <div><div class="eyebrow">For the family</div><h2>Still <em>growing</em></h2></div>
+      <p>The family tree and the reunion pages are on the way.</p>
     </div>
     <div class="tiles reveal">
       <div class="tile">
@@ -366,7 +435,26 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 
 <script>
 (function(){
-  document.documentElement.classList.add('js');
+  var root=document.documentElement,sp=document.getElementById('splash'),enter=document.getElementById('enter'),done=false;
+  if(root.classList.contains('splash-on')){
+    var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    enter.focus({preventScroll:true});
+    var finish=function(){root.classList.remove('splash-on');sp.hidden=true;window.scrollTo(0,0);document.getElementById('top').focus({preventScroll:true})};
+    var go=function(){
+      if(done)return;done=true;
+      try{sessionStorage.setItem('8gg-splash','1')}catch(e){}
+      if(still){finish();return}
+      sp.classList.add('leaving');
+      var t=setTimeout(finish,1300);
+      sp.addEventListener('transitionend',function(){clearTimeout(t);finish()},{once:true});
+    };
+    enter.addEventListener('click',go);
+    document.addEventListener('keydown',function(e){if(!done&&/^(Enter| |Escape|ArrowDown|PageDown)$/.test(e.key)){e.preventDefault();go()}});
+    sp.addEventListener('wheel',function(e){if(e.deltaY>20)go()},{passive:true});
+    var y0=null;
+    sp.addEventListener('touchstart',function(e){y0=e.touches[0].clientY},{passive:true});
+    sp.addEventListener('touchmove',function(e){if(y0!==null&&y0-e.touches[0].clientY>40)go()},{passive:true});
+  }else{sp.hidden=true}
   var nav=document.getElementById('nav'),btn=document.getElementById('menuBtn');
   function onScroll(){nav.classList.toggle('scrolled',window.scrollY>40)}
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
