@@ -274,3 +274,15 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 @media(max-width:1000px) and (min-width:761px){.home-page .hero .wrap{grid-template-columns:1fr 1fr;gap:64px}.home-tree{width:1300px;opacity:.25}}
 @media(max-width:760px){.home-page .hero{min-height:auto;padding-top:110px}.home-page .hero .wrap{grid-template-columns:1fr;gap:48px}.home-tree{width:1100px;height:100%;opacity:.2}.home-page .hero h1{font-size:clamp(3.2rem,12vw,5rem)}.home-page .roll{border-left:0;border-top:1px solid var(--rule);padding:24px 0 0}.home-page .roll ol{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}.home-page .roll li:nth-last-child(2) a{border-bottom:0}}
 @media(max-width:400px){.home-page .roll ol{grid-template-columns:1fr}.home-page .roll li:nth-last-child(2) a{border-bottom:1px solid var(--rule)}}
+
+/* One quiet album, matching the andregraves.com photo grid. */
+.photos-page .photos{padding-top:36px}
+.photos-page .sec-head{display:block;text-align:center;border:0;margin-bottom:28px;padding-bottom:0}
+.photos-page .sec-head h1{margin:0}
+.photos-page .gallery.unified-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.photos-page .unified-gallery::after{display:none}
+.photos-page .unified-gallery a{min-width:0;aspect-ratio:4/3}
+.photos-page .unified-gallery img{width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:50% 20%;opacity:1}
+.photos-page .unified-gallery a:hover img{transform:none;opacity:.9}
+@media(max-width:1000px){.photos-page .gallery.unified-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.photos-page .gallery.unified-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.photos-page .photos{padding-top:24px}.photos-page .sec-head{margin-bottom:20px}}

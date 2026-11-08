@@ -16,17 +16,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="assets/site.css">
-</head><body><a class="skip-link" href="#content">Skip to content</a><nav class="nav" id="nav" aria-label="Main navigation"><div class="wrap"><a href="index.html" class="brand"><b>8</b> Great Graves</a><button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="menu" aria-expanded="false"><span></span><span></span><span></span></button><ul id="menu"><li><a href="index.html">Home</a></li><li><a href="founders.html">Founders</a></li><li><a href="eight.html">The Eight</a></li><li><a href="timeline.html">Timeline</a></li><li><a href="places.html">Places</a></li><li><a href="photos.html" aria-current="page">Photos</a></li><li><a href="family.html">Family</a></li></ul></div></nav><main id="content" class="page-main"><section class="photos" id="photos">
+</head><body class="photos-page"><a class="skip-link" href="#content">Skip to content</a><nav class="nav" id="nav" aria-label="Main navigation"><div class="wrap"><a href="index.html" class="brand"><b>8</b> Great Graves</a><button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="menu" aria-expanded="false"><span></span><span></span><span></span></button><ul id="menu"><li><a href="index.html">Home</a></li><li><a href="founders.html">Founders</a></li><li><a href="eight.html">The Eight</a></li><li><a href="timeline.html">Timeline</a></li><li><a href="places.html">Places</a></li><li><a href="photos.html" aria-current="page">Photos</a></li><li><a href="family.html">Family</a></li></ul></div></nav><main id="content" class="page-main"><section class="photos" id="photos">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div><div class="eyebrow">Gathered</div><h1>Family <em>photos</em></h1></div>
-      <p>Pictures from the reunions, and the ones families have sent in from their own albums.</p>
-    </div>
-    <div class="tabs" role="tablist" aria-label="Photo albums">
-      <button class="tab" role="tab" id="tab-reunion-2022" aria-controls="album" aria-selected="true" data-album="reunion-2022">Reunion 2022<b></b></button>
-      <button class="tab" role="tab" id="tab-family" aria-controls="album" aria-selected="false" data-album="family">Family submitted<b></b></button>
-    </div>
-    <div id="album" role="tabpanel" aria-live="polite"></div>
+    <div class="sec-head reveal"><h1 id="photos-title">Family <em>photos</em></h1></div>
+    <div id="album" aria-labelledby="photos-title"></div>
   </div>
 </section></main><div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <div class="bar"><span id="lbCount"></span><button type="button" id="lbClose" aria-label="Close">&times;</button></div>
