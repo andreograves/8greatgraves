@@ -253,3 +253,13 @@ footer small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;colo
 .home-card:hover{background:var(--panel)}
 @media(max-width:1000px){.nav ul{gap:16px}.nav ul a{letter-spacing:.1em}}
 @media(max-width:760px){.home-grid{grid-template-columns:1fr}}
+
+/* A quiet, hand-drawn family tree behind the home page. */
+.home-page main{position:relative;isolation:isolate}
+.home-tree{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(100%,1600px);height:100%;max-height:1350px;color:var(--gold);opacity:.16;pointer-events:none;z-index:-1}
+.home-tree path{vector-effect:non-scaling-stroke}
+.home-page .hero::after{opacity:.45}
+.home-page .home-grid{background:rgba(46,42,35,.65)}
+.home-page .home-card{background:rgba(21,19,15,.8)}
+.home-page .home-card:hover{background:var(--panel)}
+@media(max-width:760px){.home-tree{top:120px;width:160%;max-width:none;height:1050px;opacity:.12}}
